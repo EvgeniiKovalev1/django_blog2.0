@@ -22,8 +22,8 @@ class BlogModel(models.Model):
 
 class Location(BlogModel):
     name = models.CharField(
-    "Название места",
-    max_length=settings.MAX_FIELD_LENGTH
+        "Название места",
+        max_length=settings.MAX_FIELD_LENGTH
     )
 
     class Meta:

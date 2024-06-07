@@ -21,7 +21,10 @@ class BlogModel(models.Model):
 
 
 class Location(BlogModel):
-    name = models.CharField("Название места", max_length=settings.MAX_FIELD_LENGTH)
+    name = models.CharField(
+        "Название места", 
+        max_length=settings.MAX_FIELD_LENGTH
+    )
 
     class Meta:
         verbose_name = "местоположение"
@@ -74,7 +77,10 @@ class Post(BlogModel):
         verbose_name="Местоположение",
     )
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True, verbose_name="Категория"
+        Category,
+        on_delete=models.SET_NULL, 
+        null=True, 
+        verbose_name="Категория"
     )
 
     class Meta:

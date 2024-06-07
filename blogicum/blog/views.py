@@ -10,11 +10,7 @@ from blog.models import Post, Category
 
 
 def get_posts(category):
-    return Post.objects.select_related(
-        "author", 
-        "category", 
-        "location"
-        ).filter(
+    return Post.objects.select_related("author", "category", "location").filter(
         is_published=True,
         pub_date__lt=now(),
         category__is_published=True,
@@ -34,11 +30,7 @@ def post_detail(request, post_id):
 
 
 def category_posts(request, category_slug):
-    category = get_object_or_404(
-        Category, 
-        slug=category_slug, 
-        is_published=True
-        )
+    category = get_object_or_404(Category, slug=category_slug, is_published=True)
     posts = get_posts(category=category)
     context = {
         "category": category,

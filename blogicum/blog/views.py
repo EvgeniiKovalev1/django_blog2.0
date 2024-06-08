@@ -16,6 +16,7 @@ def get_posts(queryset):
         category__is_published=True
     )
 
+
 def index(request: HttpRequest) -> HttpResponse:
     posts = get_posts()[:settings.POSTS_BY_PAGE]
     context = {"post_list": posts}

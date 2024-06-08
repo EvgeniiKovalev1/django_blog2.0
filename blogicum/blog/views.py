@@ -6,6 +6,7 @@ from blog.models import Post, Category
 
 
 def get_posts(queryset):
+    queryset = Post.objects.select_related
     return queryset.filter(
         is_published=True,
         pub_date__lt=now(),

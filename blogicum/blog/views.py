@@ -6,7 +6,8 @@ from blog.models import Post, Category
 
 
 def get_posts(queryset):
-    return Post.objects.select_related(
+    queryset = Post.objects
+    return queryset.select_related(
         'author',
         'category',
         'location',

@@ -6,11 +6,6 @@ from blog.models import Post, Category
 
 
 def get_posts(queryset):
-    queryset = Post.objects.select_related(
-        'author',
-        'category',
-        'location',
-    )
     return queryset.filter(
         is_published=True,
         pub_date__lt=now(),
@@ -36,11 +31,11 @@ def category_posts(request, category_slug):
         is_published=True
     )
     posts = get_posts(
-        category.post_set.select_related(
-            'author',
-            'category',
-            'location'
-        )
+        Post.objects.select_related(
+        'author',
+        'category',
+        'location',
+    )
     )
     context = {
         'category': category,

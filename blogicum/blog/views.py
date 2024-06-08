@@ -5,8 +5,7 @@ from django.utils.timezone import now
 from blog.models import Post, Category
 
 
-def get_posts(queryset):
-    queryset = Post.objects
+def get_posts(queryset=Post.objects):
     return queryset.select_related(
         'author',
         'category',

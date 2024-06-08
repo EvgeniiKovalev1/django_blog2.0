@@ -11,7 +11,11 @@ def get_posts(queryset):
         pub_date__lt=now(),
         category__is_published=True
     )
-
+    Post.objects.select_related(
+            'author',
+            'category',
+            'location',
+        )
 
 def index(request: HttpRequest) -> HttpResponse:
     posts = get_posts()[:settings.POSTS_BY_PAGE]
@@ -30,13 +34,7 @@ def category_posts(request, category_slug):
         slug=category_slug,
         is_published=True
     )
-    posts = get_posts(
-        Post.objects.select_related(
-            'author',
-            'category',
-            'location',
-        )
-    )
+    posts = get_posts(category.posts)
     context = {
         'category': category,
         'post_list': posts,

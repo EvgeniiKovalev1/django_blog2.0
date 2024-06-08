@@ -6,16 +6,15 @@ from blog.models import Post, Category
 
 
 def get_posts(queryset):
-    return queryset.filter(
+    return Post.objects.select_related(
+        'author',
+        'category',
+        'location',
+    ).filter(
         is_published=True,
         pub_date__lt=now(),
         category__is_published=True
     )
-    Post.objects.select_related(
-            'author',
-            'category',
-            'location',
-        )
 
 def index(request: HttpRequest) -> HttpResponse:
     posts = get_posts()[:settings.POSTS_BY_PAGE]

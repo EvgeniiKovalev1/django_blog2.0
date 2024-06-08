@@ -32,9 +32,9 @@ def category_posts(request, category_slug):
     )
     posts = get_posts(
         Post.objects.select_related(
-        'author',
-        'category',
-        'location',
+            'author',
+            'category',
+            'location',
         )
     )
     context = {

@@ -35,7 +35,7 @@ def category_posts(request, category_slug):
         'author',
         'category',
         'location',
-    )
+        )
     )
     context = {
         'category': category,

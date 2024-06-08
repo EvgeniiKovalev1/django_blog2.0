@@ -9,15 +9,19 @@ from django.utils.timezone import now
 from blog.models import Post, Category
 
 
-def get_posts(**filters):
-    return Post.objects.select_related(
-        'author', 'category', 'location',
-    ).filter(
+def get_posts(queryset=None):
+    if queryset is None:
+        queryset = Post.objects.select_related(
+            'author', 'category', 'location'
+        )
+    
+    queryset = queryset.filter(
         is_published=True,
-        pub_date__lt=now(),
-        category__is_published=True,
-        **filters
+        pub_date__lt=timezone.now(),
+        category__is_published=True
     )
+
+    return queryset
 
 
 def index(request: HttpRequest) -> HttpResponse:

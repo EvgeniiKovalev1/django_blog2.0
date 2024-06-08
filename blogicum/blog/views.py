@@ -30,7 +30,7 @@ def category_posts(request, category_slug):
         Category,
         slug=category_slug,
         is_published=True
-        )
+    )
     posts = get_posts(
         category.post_set.select_related(
             'author',
